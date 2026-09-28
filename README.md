@@ -20,21 +20,10 @@
 
 Проект не требует сборки и серверной части.
 
-## Структура
+## Автор
 
-```
-index.html
-webpack.html
-vite.html
-gulp.html
-comparison.html
-guides.html
-practice.html
-404.html
-css/style.css
-js/main.js
-fonts/jetbrains-mono-latin.woff2
-fonts/jetbrains-mono-cyrillic.woff2
-README.md
-read.md
-```
+**Воронков Георгий**, 835 группа
+
+- [Telegram](https://t.me/barabababababa)
+- [Email](mailto:voronkov-16@bk.ru)
+
