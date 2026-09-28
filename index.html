@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сборщики фронтенд-проектов: Webpack, Vite и Gulp</title>
+  <meta name="description" content="Зачем фронтенд-проекту сборщик, как работают Webpack, Vite и Gulp и чем они отличаются друг от друга.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link main-nav__link--active" href="index.html" aria-current="page">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Сборщики фронтенд-проектов</h1>
+
+            <p>
+              Фронтенд-проект состоит из множества файлов: модулей JavaScript, стилей, шаблонов
+              и изображений. Сборщик объединяет их в готовые к публикации файлы и попутно
+              выполняет промежуточную обработку, например минификацию и транспиляцию.
+            </p>
+            <p>
+              Раньше скрипты подключали вручную отдельными тегами script, и порядок подключения
+              приходилось отслеживать самому. Сборщик сам разбирает зависимости между модулями
+              и собирает их в нужном порядке.
+            </p>
+
+            <h2>Что делает сборщик</h2>
+            <p>
+              Основная задача инструмента — превратить исходные файлы в сборку, которую можно
+              отдать браузеру. По ходу работы он обычно:
+            </p>
+            <ul>
+              <li>объединяет JavaScript-модули в один или несколько файлов;</li>
+              <li>компилирует и обрабатывает стили, изображения и шрифты;</li>
+              <li>минифицирует код, чтобы уменьшить размер файлов;</li>
+              <li>запускает сервер разработки с автоматической перезагрузкой страницы.</li>
+            </ul>
+
+            <h2>Webpack</h2>
+            <p>
+              <a href="webpack.html">Webpack</a> — сборщик модулей, вышедший в 2012 году.
+              Он работает на Node.js, строит граф зависимостей от точки входа и собирает
+              бандлы. Настройка хранится в файле webpack.config.js, а возможности расширяются
+              загрузчиками и плагинами.
+            </p>
+
+            <h2>Vite</h2>
+            <p>
+              <a href="vite.html">Vite</a> появился в 2020 году. В режиме разработки он отдаёт
+              модули браузеру напрямую и опирается на нативные ES-модули, поэтому сервер
+              запускается быстро. Для продакшн-сборки используется Rolldown.
+            </p>
+
+            <h2>Gulp</h2>
+            <p>
+              <a href="gulp.html">Gulp</a> — это таск-раннер, а не сборщик модулей. Задачи
+              описываются в gulpfile.js и выполняются над файлами через потоки: скомпилировать
+              SCSS, сжать изображения, скопировать ресурсы.
+            </p>
+
+            <p>
+              Выбор зависит от задачи. Для приложения с модулями подойдут Webpack или Vite,
+              а для обработки набора файлов без модульной сборки удобнее Gulp. Подробное
+              сопоставление приведено в разделе
+              <a href="comparison.html">Сравнение</a>, а один и тот же проект, собранный всеми
+              тремя инструментами, разобран в разделе <a href="practice.html">Практика</a>.
+            </p>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">docs</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Официальная документация</h2>
+              <ul class="sidebar-card__list">
+                <li><a href="https://webpack.js.org/" rel="noopener">webpack.js.org</a></li>
+                <li><a href="https://vite.dev/" rel="noopener">vite.dev</a></li>
+                <li><a href="https://gulpjs.com/" rel="noopener">gulpjs.com</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

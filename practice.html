@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Практика: один проект тремя инструментами</title>
+  <meta name="description" content="Пошаговая сборка одного статического проекта на Vite, Webpack и Gulp и сравнение того, что требует каждый инструмент.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="practice.html" aria-current="page">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Практика: один проект тремя инструментами</h1>
+
+            <p>
+              Возьмём небольшой статический проект и соберём его по очереди Vite, Webpack
+              и Gulp. Исходники одни и те же, меняется только инструмент сборки, поэтому
+              разницу в настройке видно напрямую.
+            </p>
+
+            <h2>Исходный проект</h2>
+            <ul>
+              <li><code>index.html</code> — разметка страницы;</li>
+              <li><code>src/js/app.js</code> — модуль JavaScript, который импортирует другой модуль;</li>
+              <li><code>src/scss/main.scss</code> — стили на SCSS;</li>
+              <li><code>src/images/</code> — несколько изображений.</li>
+            </ul>
+            <p>
+              Задача одна: на выходе получить каталог с готовой страницей, собранными стилями
+              и оптимизированными изображениями.
+            </p>
+
+            <h2>Сборка на Vite</h2>
+            <ol>
+              <li>Установить пакет: <code>npm install --save-dev vite</code>.</li>
+              <li>Добавить в <code>package.json</code> команды <code>dev</code> и <code>build</code>.</li>
+              <li>Указать входной HTML-файл в <code>vite.config.js</code>, если структура нестандартная.</li>
+              <li>Запустить разработку командой <code>npm run dev</code>, сборку — командой <code>npm run build</code>.</li>
+            </ol>
+            <p>
+              Vite сам компилирует SCSS, если установлен пакет <code>sass</code>, и копирует
+              статику из каталога <code>public</code>.
+            </p>
+
+            <h2>Сборка на Webpack</h2>
+            <ol>
+              <li>Установить <code>webpack</code>, <code>webpack-cli</code> и загрузчики для SCSS.</li>
+              <li>Задать точку входа в поле <code>entry</code> и каталог результата в <code>output</code>.</li>
+              <li>Описать правила для <code>.scss</code> с загрузчиками <code>sass-loader</code> и <code>css-loader</code>.</li>
+              <li>Подключить <code>HtmlWebpackPlugin</code>, чтобы HTML создавался автоматически.</li>
+              <li>Собрать проект командой <code>npx webpack --mode production</code>.</li>
+            </ol>
+
+            <h2>Сборка на Gulp</h2>
+            <ol>
+              <li>Установить <code>gulp</code> и плагины <code>gulp-sass</code>, <code>gulp-imagemin</code>.</li>
+              <li>Описать задачу <code>styles</code> для компиляции SCSS.</li>
+              <li>Описать задачу <code>images</code> для сжатия изображений.</li>
+              <li>Объединить задачи в одну через <code>series</code> и запустить её командой <code>npx gulp build</code>.</li>
+            </ol>
+
+            <p>
+              Во всех трёх случаях получается рабочая страница. Vite потребовал меньше всего
+              настроек, Webpack — отдельной конфигурации для загрузчиков, а Gulp — задачи
+              под каждый тип файлов. Если проект состоит из модулей, сборщик избавляет
+              от ручной настройки загрузчиков; если нужно только обработать файлы, достаточно
+              таск-раннера.
+            </p>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">setup</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Что понадобится</h2>
+              <ul class="sidebar-card__list">
+                <li>Node.js и npm</li>
+                <li>Пакет sass для SCSS</li>
+                <li>Каталог с исходниками</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

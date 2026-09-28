@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vite: сервер разработки и сборка</title>
+  <meta name="description" content="Как работает Vite: нативные ES-модули и HMR в разработке, сборка через Rolldown, файл vite.config.js и переменные окружения.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="vite.html" aria-current="page">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Vite</h1>
+
+            <p>
+              Vite появился в 2020 году и развивается под руководством Эвана Ю. Инструмент
+              состоит из двух частей: сервера разработки и сборки для продакшна. Для работы
+              нужен Node.js.
+            </p>
+            <p>
+              В режиме разработки Vite не собирает единый бандл. Он отдаёт модули браузеру
+              как есть, а сторонние зависимости заранее объединяет в один модуль сборщиком
+              Rolldown.
+            </p>
+
+            <h2>Сервер разработки и горячая замена</h2>
+            <p>
+              Браузер загружает модули через нативные ES-модули, поэтому сервер запускается
+              быстро даже в крупных проектах. При изменении файла Vite обновляет только
+              затронутый модуль, не перезагружая страницу целиком. Такой режим называют
+              горячей заменой модулей (HMR).
+            </p>
+
+            <h2>Сборка для продакшна</h2>
+            <p>
+              Для продакшн-сборки используется Rolldown. Он объединяет модули, минифицирует код
+              и подготавливает ресурсы. Команда <code>vite build</code> создаёт каталог dist,
+              а <code>vite preview</code> позволяет посмотреть собранную версию локально.
+            </p>
+
+            <h2>Настройка</h2>
+            <p>
+              Параметры сборки хранятся в файле <code>vite.config.js</code>. Файл не
+              обязателен: проект работает и со стандартными настройками.
+            </p>
+            <pre><code>import { defineConfig } from "vite";
+
+export default defineConfig({
+  server: {
+    port: 5173
+  }
+});</code></pre>
+
+            <h2>Переменные окружения</h2>
+            <p>
+              Переменные, доступные клиентскому коду, должны начинаться с префикса
+              <code>VITE_</code>. Их объявляют в файлах <code>.env</code>, а в коде читают
+              через <code>import.meta.env</code>. Переменные без этого префикса в браузер
+              не попадают.
+            </p>
+
+            <h2>Требования</h2>
+            <p>
+              Vite работает на Node.js, минимальную версию указывают в документации
+              к выпуску. Пакет устанавливают через npm. Для проектов на React, Vue и других
+              фреймворках есть готовые шаблоны.
+            </p>
+
+            <h2>Видеоуроки</h2>
+            <p>
+              Два ролика с RuTube: быстрый старт на Vite и сборка проекта.
+            </p>
+            <div class="media-embed">
+              <iframe src="https://rutube.ru/play/embed/6f20671fa9730fbd7630fc5ba3ddbfb3"
+                title="Видеоурок: Vite с нуля, быстрый старт"
+                loading="lazy"
+                allowfullscreen></iframe>
+            </div>
+            <div class="media-embed">
+              <iframe src="https://rutube.ru/play/embed/544786e626f51b4b2701adb31d1745d5"
+                title="Видеоурок: сборка проекта на Vite"
+                loading="lazy"
+                allowfullscreen></iframe>
+            </div>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">docs</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Документация Vite</h2>
+              <ul class="sidebar-card__list">
+                <li><a href="https://vite.dev/guide/" rel="noopener">Руководство</a></li>
+                <li><a href="https://vite.dev/config/" rel="noopener">Справочник настроек</a></li>
+                <li><a href="https://vite.dev/guide/env-and-mode" rel="noopener">Переменные окружения</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

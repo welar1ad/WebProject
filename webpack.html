@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webpack: сборка модулей и настройка</title>
+  <meta name="description" content="Как устроен Webpack: точка входа и выход, загрузчики, плагины, разделение кода и режимы разработки и продакшна.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="webpack.html" aria-current="page">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Webpack</h1>
+
+            <p>
+              Webpack — сборщик модулей для JavaScript. Проект появился в 2012 году,
+              распространяется под лицензией MIT и работает на Node.js. Сборка начинается
+              с одного или нескольких входных файлов: Webpack проходит по импортам, строит
+              граф зависимостей и формирует выходные файлы.
+            </p>
+
+            <h2>Точка входа и выход</h2>
+            <p>
+              Входные файлы задают в поле entry, а каталог и имена результатов — в output.
+              По умолчанию готовые файлы складываются в каталог dist. Файл
+              <code>webpack.config.js</code>:
+            </p>
+            <pre><code>module.exports = {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: __dirname + "/dist"
+  }
+};</code></pre>
+
+            <h2>Загрузчики</h2>
+            <p>
+              Сам по себе Webpack понимает только JavaScript и JSON. Загрузчики учат его
+              работать с другими типами файлов: <code>css-loader</code> разбирает CSS,
+              <code>sass-loader</code> компилирует SCSS, <code>babel-loader</code> переводит
+              современный синтаксис JavaScript в совместимый с браузерами. Загрузчик
+              указывают для конкретного расширения, и он применяется к файлу по ходу сборки.
+            </p>
+
+            <h2>Плагины</h2>
+            <p>
+              Плагины работают со всей сборкой, а не с отдельными файлами.
+              <code>HtmlWebpackPlugin</code> создаёт HTML-страницу и подставляет в неё
+              собранные скрипты, <code>MiniCssExtractPlugin</code> выносит стили в отдельный
+              файл, <code>DefinePlugin</code> подставляет значения на этапе сборки.
+            </p>
+
+            <h2>Разделение кода</h2>
+            <p>
+              Большой единый бандл загружается дольше, поэтому Webpack умеет делить код.
+              Динамический импорт <code>import()</code> подгружает модуль по требованию,
+              а оптимизация <code>splitChunks</code> выносит общие зависимости в отдельный
+              файл, который кэшируется браузером.
+            </p>
+
+            <h2>Разработка и продакшн</h2>
+            <p>
+              В режиме development Webpack не минифицирует код и добавляет карты исходников,
+              а webpack-dev-server обновляет страницу при изменениях. В режиме production
+              включаются минификация и другие оптимизации. Режим задают флагом
+              <code>mode</code> или в конфигурации.
+            </p>
+
+            <h2>Требования</h2>
+            <p>
+              Webpack запускается на Node.js, конкретную минимальную версию указывают
+              в документации к выпуску. Установка и запуск обычно выполняются через npm
+              или другой менеджер пакетов.
+            </p>
+
+            <h2>Видеоуроки</h2>
+            <p>
+              Два ролика с RuTube: простая сборка с картами исходников и примеры настройки.
+            </p>
+            <div class="media-embed">
+              <iframe src="https://rutube.ru/play/embed/18e3e8559d7be33b6a0ee624ddb186aa"
+                title="Видеоурок: Webpack 2.4, простая сборка и source maps"
+                loading="lazy"
+                allowfullscreen></iframe>
+            </div>
+            <div class="media-embed">
+              <iframe src="https://rutube.ru/play/embed/7452c90400f9e78e54cefc883eba9181"
+                title="Видеоурок: Webpack, простые примеры"
+                loading="lazy"
+                allowfullscreen></iframe>
+            </div>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">docs</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Разделы документации</h2>
+              <ul class="sidebar-card__list">
+                <li><a href="https://webpack.js.org/concepts/" rel="noopener">Основные понятия</a></li>
+                <li><a href="https://webpack.js.org/loaders/" rel="noopener">Список загрузчиков</a></li>
+                <li><a href="https://webpack.js.org/plugins/" rel="noopener">Список плагинов</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

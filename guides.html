@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Гайды: настройка сборки на практике</title>
+  <meta name="description" content="Три коротких руководства: быстрый старт на Vite, ручная конфигурация Webpack для CSS и оптимизация изображений в Gulp.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="guides.html" aria-current="page">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Гайды</h1>
+
+            <p>
+              Ниже три примера: как создать проект на Vite, как настроить Webpack для работы
+              со стилями и как оптимизировать изображения в Gulp. Команды выполняются
+              в терминале из каталога проекта.
+            </p>
+
+            <h2>Быстрый старт на Vite</h2>
+            <p>
+              Сначала нужен установленный Node.js. Затем проект создаётся одной командой,
+              которая загружает шаблон:
+            </p>
+            <pre><code>npm create vite@latest my-app
+cd my-app
+npm install
+npm run dev</code></pre>
+            <p>
+              Последняя команда запускает сервер разработки. После изменения файлов страница
+              обновляется автоматически, а адрес сервера выводится в терминале.
+            </p>
+
+            <h2>Webpack для CSS</h2>
+            <p>
+              Устанавливаем сам сборщик и загрузчики для стилей:
+            </p>
+            <pre><code>npm install --save-dev webpack webpack-cli style-loader css-loader</code></pre>
+            <p>
+              Затем описываем правило: файлы с расширением <code>.css</code> проходят через
+              два загрузчика.
+            </p>
+            <pre><code>module.exports = {
+  module: {
+    rules: [
+      { test: /\.css$/, use: ["style-loader", "css-loader"] }
+    ]
+  }
+};</code></pre>
+            <p>
+              Загрузчики применяются по цепочке справа налево: <code>css-loader</code>
+              разбирает импорты в CSS, а <code>style-loader</code> встраивает стили
+              на страницу.
+            </p>
+
+            <h2>Оптимизация изображений в Gulp</h2>
+            <p>
+              Для сжатия изображений подключаем плагин imagemin и описываем задачу.
+            </p>
+            <pre><code>const { src, dest } = require("gulp");
+const imagemin = require("gulp-imagemin");
+
+exports.images = function () {
+  return src("src/images/*")
+    .pipe(imagemin())
+    .pipe(dest("dist/images"));
+};</code></pre>
+            <p>
+              Запуск задачи: <code>npx gulp images</code>. Обработанные файлы появятся
+              в каталоге <code>dist/images</code>.
+            </p>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">setup</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Перед началом</h2>
+              <ul class="sidebar-card__list">
+                <li>Установленный Node.js и npm</li>
+                <li>Терминал в каталоге проекта</li>
+                <li>Файл package.json с зависимостями</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сравнение Webpack, Vite и Gulp</title>
+  <meta name="description" content="Таблица с характеристиками Webpack, Vite и Gulp: тип инструмента, конфигурация, горячая замена, продакшн-сборка, расширения и типичные задачи.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link" href="gulp.html">Gulp</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="comparison.html" aria-current="page">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body layout__body--wide">
+
+        <main class="layout-main">
+          <article>
+            <h1>Сравнение Webpack, Vite и Gulp</h1>
+
+            <p>
+              В таблице сопоставлены три инструмента по основным характеристикам. Отдельные
+              параметры зависят от версии, поэтому конкретные значения стоит проверять
+              в документации к выбранному выпуску.
+            </p>
+
+            <div class="table-scroll">
+              <table class="comparison-table">
+                <caption>Характеристики сборщиков и таск-раннера</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Параметр</th>
+                    <th scope="col">Webpack</th>
+                    <th scope="col">Vite</th>
+                    <th scope="col">Gulp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Тип инструмента</th>
+                    <td>Сборщик модулей</td>
+                    <td>Сервер разработки и сборщик</td>
+                    <td>Таск-раннер</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Год появления</th>
+                    <td>2012</td>
+                    <td>2020</td>
+                    <td>2013</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Среда запуска</th>
+                    <td>Node.js</td>
+                    <td>Node.js</td>
+                    <td>Node.js</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Работа в разработке</th>
+                    <td>Собирает бандл, обновляет страницу через dev-сервер</td>
+                    <td>Отдаёт нативные ES-модули, обновляет отдельные модули</td>
+                    <td>Запускает задачи и следит за файлами через watch</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Горячая замена модулей</th>
+                    <td>Поддерживается через dev-сервер</td>
+                    <td>Встроена</td>
+                    <td>Не предоставляется</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Продакшн-сборка</th>
+                    <td>Собственный движок, режим production</td>
+                    <td>Rolldown</td>
+                    <td>Набор задач с плагинами</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Конфигурация</th>
+                    <td>webpack.config.js</td>
+                    <td>vite.config.js, необязательна</td>
+                    <td>gulpfile.js</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Расширения</th>
+                    <td>Загрузчики и плагины</td>
+                    <td>Плагины и встроенные возможности</td>
+                    <td>Плагины</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Сборка модулей</th>
+                    <td>Да</td>
+                    <td>Да</td>
+                    <td>Нет</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Типичная задача</th>
+                    <td>Сборка приложений и крупных проектов</td>
+                    <td>Новые приложения, библиотеки, быстрый старт</td>
+                    <td>Обработка файлов, стилей и статики</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Webpack и Vite собирают модули, но по-разному: первый формирует бандл
+              на этапе разработки, второй откладывает сборку до продакшна. Gulp решает
+              другую задачу — автоматизирует обработку готовых файлов. Инструменты можно
+              использовать вместе.
+            </p>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">links</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Официальные сайты</h2>
+              <ul class="sidebar-card__list">
+                <li><a href="https://webpack.js.org/" rel="noopener">Webpack</a></li>
+                <li><a href="https://vite.dev/" rel="noopener">Vite</a></li>
+                <li><a href="https://gulpjs.com/" rel="noopener">Gulp</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

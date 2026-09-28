@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gulp: задачи и потоки</title>
+  <meta name="description" content="Как устроен Gulp: задачи в gulpfile.js, работа через потоки, методы src, dest, watch, series и parallel, плагины и типичные сценарии.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ConciseCSS/concise.css@v4.1.2/dist/concise.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a class="site-logo" href="index.html">Сборщики<span>.</span>проектов</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link" href="index.html">Главная</a></li>
+          <li><a class="main-nav__link" href="webpack.html">Webpack</a></li>
+          <li><a class="main-nav__link" href="vite.html">Vite</a></li>
+          <li><a class="main-nav__link main-nav__link--active" href="gulp.html" aria-current="page">Gulp</a></li>
+          <li><a class="main-nav__link" href="comparison.html">Сравнение</a></li>
+          <li><a class="main-nav__link" href="guides.html">Гайды</a></li>
+          <li><a class="main-nav__link" href="practice.html">Практика</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="layout">
+      <div class="layout__body">
+
+        <main class="layout-main">
+          <article>
+            <h1>Gulp</h1>
+
+            <p>
+              Gulp — таск-раннер на Node.js. Он не собирает модули, а выполняет задачи
+              над файлами проекта. Задачи описывают в файле <code>gulpfile.js</code>,
+              а дополнительные возможности подключают плагинами.
+            </p>
+            <p>
+              В основе лежат потоки Node.js. Задача читает файлы через <code>src</code>,
+              прогоняет их через цепочку обработчиков и записывает результат через
+              <code>dest</code>.
+            </p>
+
+            <h2>Задачи и потоки</h2>
+            <p>
+              Каждая задача — это функция, которая возвращает поток. Между собой задачи
+              связывают методами <code>series</code> (последовательно) и
+              <code>parallel</code> (параллельно). Готовые задачи экспортируют, и после этого
+              их можно запускать из командной строки одной командой.
+            </p>
+
+            <h2>Основные методы</h2>
+            <p>
+              <code>src</code> задаёт исходные файлы, <code>dest</code> — каталог результата,
+              <code>pipe</code> передаёт поток следующему обработчику, <code>watch</code>
+              следит за изменениями. Пример конвейера для стилей:
+            </p>
+            <pre><code>const { src, dest, watch, series } = require("gulp");
+const sass = require("gulp-sass")(require("sass"));
+
+function styles() {
+  return src("src/scss/*.scss")
+    .pipe(sass())
+    .pipe(dest("dist/css"));
+}
+
+exports.build = series(styles);
+exports.dev = function () {
+  watch("src/scss/*.scss", styles);
+};</code></pre>
+
+            <h2>Плагины</h2>
+            <p>
+              Плагин выполняет одну конкретную операцию: <code>gulp-sass</code> компилирует
+              SCSS, <code>gulp-csso</code> минифицирует CSS, <code>gulp-uglify</code> сжимает
+              JavaScript, <code>gulp-imagemin</code> оптимизирует изображения. Большинство
+              плагинов работают как звенья одной цепочки pipe.
+            </p>
+
+            <h2>Где применяется</h2>
+            <p>
+              Gulp удобен, когда нужно обработать набор готовых файлов: собрать стили,
+              подготовить изображения, скопировать шрифты и статику. Для приложений
+              с модулями чаще берут сборщики вроде Webpack или Vite. Оба подхода можно
+              совмещать: Gulp запускает общие задачи, а модули собирает отдельный инструмент.
+            </p>
+          </article>
+        </main>
+
+        <aside class="layout__aside">
+          <div class="sidebar-card">
+            <p class="sidebar-card__bar">
+              <span class="sidebar-card__dot sidebar-card__dot--red"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--yellow"></span>
+              <span class="sidebar-card__dot sidebar-card__dot--green"></span>
+              <span class="sidebar-card__file">docs</span>
+            </p>
+            <div class="sidebar-card__body">
+              <h2 class="sidebar-card__title">Материалы по Gulp</h2>
+              <ul class="sidebar-card__list">
+                <li><a href="https://gulpjs.com/docs/en/getting-started/quick-start" rel="noopener">Быстрый старт</a></li>
+                <li><a href="https://gulpjs.com/docs/en/api/getting-started" rel="noopener">Справочник API</a></li>
+                <li><a href="https://gulpjs.com/plugins/" rel="noopener">Каталог плагинов</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__author">Автор сайта: Воронков Георгий, 835 группа</p>
+      <p>Telegram: <a href="https://t.me/barabababababa">@barabababababa</a></p>
+      <p>&copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
